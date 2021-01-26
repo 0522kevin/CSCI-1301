@@ -1,0 +1,83 @@
+import java.util.Scanner;
+
+public class ParseTheTweet {
+    public static void main(String[] args){
+    	
+    	//creates Scanner object called scan
+        Scanner scan = new Scanner (System.in);
+        
+        //creates String variables to store the parsed information
+        String tweet;
+        String twtType;
+        String twtDetail;
+        String twtLocation;
+        String twtLatitude;
+        String twtLongitude;
+
+        //creates integer variables to store the index numbers of # and /
+        //these variables are gonna be used for substring methods
+        int start;
+        int finish;
+
+        //gathers input from the user
+        System.out.println("Enter a tweet below");
+        tweet = scan.nextLine();
+
+        //start gets the index of the first # in the input
+        //finish gets the index of the first ; in the input
+        //twtType gathers the substring of tweet from the index 5 after # and stops at 1 before finish
+        //after storing the type in twtType, tweet is shortened because the information for type has already been gathered
+        //twtType is converted to all uppercase
+        start = tweet.indexOf('#');
+        finish = tweet.indexOf(';');
+        twtType = tweet.substring(start + 5, finish);
+        twtType = twtType.trim();
+        tweet = tweet.substring(finish + 2);
+        twtType = twtType.toUpperCase();
+
+        //twtDetail gathers the substring of tweet from the index 5 after # and stops at 1 before finish
+        //tweet is shortened beacuse detail has already been stored in twtDetail
+        //for twtDetail, ',' is replaced with '-'
+        start = tweet.indexOf('#');
+        finish = tweet.indexOf(';');
+        twtDetail = tweet.substring(start + 5, finish);
+        twtDetail = twtDetail.trim();
+        tweet = tweet.substring(finish + 2);
+        twtDetail = twtDetail.replace(',', '-');
+        
+        //twtLocation gathers the substring of tweet from the index 5 after # and stops at 1 before finish
+        //tweet is shortened because data for location has already been stored in twtLocation
+        //for twtLocation, ',' has been replaced with '-'
+        start = tweet.indexOf('#');
+        finish = tweet.indexOf(';');
+        twtLocation = tweet.substring(start + 5, finish);
+        twtLocation = twtLocation.trim();
+        tweet = tweet.substring(finish + 2);
+        twtLocation = twtLocation.replace(',', '-');
+
+        //twtLatitude gathers the substring of the tweet from index 5 after # and stops at 1 before finish
+        //tweet is shortened to exclude the information for latitude
+        start = tweet.indexOf('#');
+        finish = tweet.indexOf(';');
+        twtLatitude = tweet.substring(start + 5, finish);
+        twtLatitude = twtLatitude.trim();
+        tweet = tweet.substring(finish + 2);
+
+        //twtLongitude gathers the substring of the tweet from index 5 after # and stops at 1 before finish
+        //tweet does not have to be shortened because there is no need for shortened tweet after gathering information of longitude
+        start = tweet.indexOf('#');
+        finish = tweet.indexOf(';');
+        twtLongitude = tweet.substring(start + 5, finish);
+        twtLongitude = twtLongitude.trim();
+
+        //prints out the gathered information individually
+        System.out.println("Type:     \t" + twtType);
+        System.out.println("Detail:   \t" + twtDetail);
+        System.out.println("Location: \t" + twtLocation);
+        System.out.println("Latitude: \t" + twtLatitude);
+        System.out.println("Longitude:\t" + twtLongitude);
+
+        //closes Scanner to avoid warning
+        scan.close();
+    }
+}
